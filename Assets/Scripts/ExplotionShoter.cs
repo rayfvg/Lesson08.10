@@ -1,11 +1,18 @@
 using UnityEngine;
 
-public class ExplotionShoter : MonoBehaviour
+public class ExplotionShoter
 {
-    [SerializeField] private float _radiusExplosion;
-    [SerializeField] private float _explosionForce;
+    private float _radiusExplosion;
+    private float _explosionForce;
 
-    [SerializeField] private ParticleSystem _explosionParticle;
+    private ParticleSystem _explosionParticle;
+
+    public ExplotionShoter(float radiusExplosion, float explosionForce, ParticleSystem explosionParticle)
+    {
+        _radiusExplosion = radiusExplosion;
+        _explosionForce = explosionForce;
+        _explosionParticle = explosionParticle;
+    }
 
     public void Shoot()
     {
@@ -13,13 +20,13 @@ public class ExplotionShoter : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
-            Instantiate(_explosionParticle, hitInfo.point, Quaternion.identity);
+            Object.Instantiate(_explosionParticle, hitInfo.point, Quaternion.identity);
 
             Collider[] targets = Physics.OverlapSphere(hitInfo.point, _radiusExplosion);
-            
+
             foreach (Collider target in targets)
             {
-                if (target.GetComponent<IPhysical>() != null)
+                if (target.GetComponent<Box>() != null)
                 {
                     Vector3 direction = (target.transform.position - hitInfo.point).normalized;
 

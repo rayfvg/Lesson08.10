@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Box : MonoBehaviour, IDragger, IPhysical
+public class Box : MonoBehaviour
 {
     
 }

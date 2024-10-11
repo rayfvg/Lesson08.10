@@ -5269,6 +5269,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &389832918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 389832919}
+  - component: {fileID: 389832920}
+  m_Layer: 0
+  m_Name: PlayerInput
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &389832919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389832918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &389832920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389832918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2133cabe00d364ebf8c28057af8fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ship: {fileID: 651510539}
+  _sail: {fileID: 1918586714}
+  _speedRotationSail: 200
+  _speedRotationShip: 100
 --- !u!1 &473231323
 GameObject:
   m_ObjectHideFlags: 0
@@ -5556,7 +5604,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 651510539}
-  - component: {fileID: 651510540}
   - component: {fileID: 651510542}
   - component: {fileID: 651510541}
   - component: {fileID: 651510543}
@@ -5588,19 +5635,6 @@ Transform:
   - {fileID: 1034143898}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &651510540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651510538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3736c6b1714834fb0ccceab7823bed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 40
 --- !u!114 &651510541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5615,11 +5649,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _salt: {fileID: 1918586714}
   _wind: {fileID: 1082733176}
-  _baseSpeed: 0.2
-  _slowingSpeedModify: 5
-  _slowingDragModify: 90
+  _ship: {fileID: 651510539}
+  _speedShip: 30
+  _speedSalt: 30
   _textSpeed: {fileID: 1409540243}
-  _textSlowing: {fileID: 1936147676}
 --- !u!54 &651510542
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7421,7 +7454,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1918586714}
-  - component: {fileID: 1918586715}
   m_Layer: 0
   m_Name: Sail
   m_TagString: Untagged
@@ -7447,20 +7479,6 @@ Transform:
   - {fileID: 1334078995}
   m_Father: {fileID: 651510539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1918586715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918586713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbe7978dac79b444b2fe67d191c6b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speedRotation: 100
-  _returnSpeed: 2
 --- !u!1 &1919552593
 GameObject:
   m_ObjectHideFlags: 0
@@ -7783,3 +7801,4 @@ SceneRoots:
   - {fileID: 1139117791}
   - {fileID: 1919552595}
   - {fileID: 620917170}
+  - {fileID: 389832919}

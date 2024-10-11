@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -6,51 +5,34 @@ public class ShipMover : MonoBehaviour
 {
     [SerializeField] private Transform _salt;
     [SerializeField] private Transform _wind;
+    [SerializeField] private Transform _ship;
 
-    [SerializeField] private float _baseSpeed;
-    [SerializeField] private float _slowingSpeedModify;
-    [SerializeField] private float _slowingDragModify;
+    [SerializeField] private float _speedShip;
+    [SerializeField] private float _speedSalt;
 
     [SerializeField] private TMP_Text _textSpeed;
-    [SerializeField] private TMP_Text _textSlowing;
 
     private Rigidbody _rigigbody;
     private WindAngle _windAngle;
-    private ShipAngle _shipAngle;
 
-    private float _minSpeedForMove = 30;
-    private float _maxSpeedForMove = 180;
-    private float _currentSpeed;
-    private float _currentSlowing;
 
     private void Awake()
     {
         _rigigbody = GetComponent<Rigidbody>();
-        _windAngle = new WindAngle(_salt, _wind);
-        _shipAngle = new ShipAngle(this);
+        _windAngle = new WindAngle(_salt, _wind, _ship);
     }
 
     private void Update()
     {
-        _currentSpeed = _windAngle.GettingWindAngle() / _slowingSpeedModify;
-        _currentSlowing = Mathf.Lerp(0, 20, _shipAngle.GettingShipAngle() / _slowingDragModify);
-    }
+        Debug.Log("вектор паруса" + _windAngle.GettingWindAngle());
+        Debug.Log("Вектор корабля" + _windAngle.GettingShipAngle());
 
-    private void FixedUpdate()
-    {
-        if (_currentSpeed > _minSpeedForMove && _currentSpeed < _maxSpeedForMove)
-        {
-            _rigigbody.AddForce(transform.forward * _currentSpeed * _baseSpeed, ForceMode.Force);
-            _textSpeed.text = "Скорость корабля " + Mathf.Abs((_rigigbody.velocity.z * _baseSpeed * 10)).ToString("0,0");
-        }
-            
-        if (_rigigbody.velocity.magnitude > 2f && _currentSlowing > 5)
-        {
-            _rigigbody.drag = 5;
-        }
-        else
-        {
-            _rigigbody.drag = 1;
-        }
+        float movementY = _windAngle.GettingWindAngle() * _speedShip * _windAngle.GettingShipAngle() * _speedSalt;
+        Vector3 direction = _ship.forward;
+
+        if (movementY > 0)
+            _rigigbody.AddForce(direction * movementY * Time.deltaTime, ForceMode.Force);
+
+        _textSpeed.text = "Скорость корабля: " + (_rigigbody.velocity.magnitude * 10f).ToString("0,0");
     }
 }

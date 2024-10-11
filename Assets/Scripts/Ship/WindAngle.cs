@@ -4,26 +4,34 @@ public class WindAngle
 {
     private Transform _salt;
     private Transform _wind;
+    private Transform _ship;
 
-    public WindAngle(Transform salt, Transform wind)
+    public WindAngle(Transform salt, Transform wind, Transform ship)
     {
         _salt = salt;
         _wind = wind;
+        _ship = ship;
     }
 
     public float GettingWindAngle()
     {
-        Vector3 directionSalt = new Vector3(-_salt.transform.forward.x, 0, -_salt.transform.forward.z);
+        Vector3 directionSalt = new Vector3(_salt.transform.forward.x, 0, _salt.transform.forward.z);
 
-        Vector3 forwardDirectionWind = new Vector3(_wind.transform.forward.x, 0, _wind.transform.forward.z);
+        Vector3 directionWind = new Vector3(_wind.transform.forward.x, 0, _wind.transform.forward.z);
 
-        //Debug.DrawRay(_salt.position, directionToTarget * 5, Color.red, 0.1f);
-        //Debug.DrawRay(_wind.transform.position, forwardDirection * 5, Color.gray, 0.1f);
+        float dotProduct = Vector3.Dot(directionSalt, directionWind);
 
-        float dotProduct = Vector3.Dot(directionSalt, forwardDirectionWind);
+        return dotProduct;
+    }
 
-        float degreetToTarget = Mathf.Acos(dotProduct / (directionSalt.magnitude * forwardDirectionWind.magnitude)) * Mathf.Rad2Deg;
+    public float GettingShipAngle()
+    {
+        Vector3 directionShip = new Vector3(_ship.transform.forward.x, 0, _ship.transform.forward.z);
 
-        return degreetToTarget;
+        Vector3 directionSalt = new Vector3(_salt.transform.forward.x, 0, _salt.transform.forward.z);
+
+        float dotProduct = Vector3.Dot(directionSalt, directionShip);
+
+        return dotProduct;
     }
 }

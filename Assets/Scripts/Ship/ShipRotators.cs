@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class ShipRotators : MonoBehaviour
+public class ShipRotators
 {
-    [SerializeField] private float _speed;
+    private Transform _ship;
+    private float _speed;
 
-    private void Update()
+    public ShipRotators(Transform ship, float speed)
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(Vector3.up, _speed * Time.deltaTime);
-        }
-        
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(Vector3.up, -_speed * Time.deltaTime);
-        }
+        _ship = ship;
+        _speed = speed;
     }
+
+    public void TurnLeft() => _ship.Rotate(Vector3.up, _speed * Time.deltaTime);
+
+    public void TurnRight() => _ship.Rotate(Vector3.up, -_speed * Time.deltaTime);
 }
